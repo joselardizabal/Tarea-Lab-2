@@ -66,7 +66,7 @@ float sum=0;
                     {
                         pelotitas_x.erase(i);
                         i--;
-                if(pelotitas_x.size()==0){
+                if(pelotitas_x.size()<1){
                 gameover();
                 }
 
@@ -95,12 +95,22 @@ float sum=0;
 //        rect_pelotita.y=100;
 //        SDL_RenderCopy(renderer,pelotita_mala, NULL, &rect_pelotita);
 //        rect_pelotita.y=200;
-//        SDL_RenderCopy(renderer,pelotita_mala, NULL, &rect_pelotita);
 //        rect_pelotita.y=300;
 //        SDL_RenderCopy(renderer,pelotita_mala, NULL, &rect_pelotita);
 
 sum+=0.05;
+if(pelotitas_x.size()<4){
+sum+= 0.04;
+}if(pelotitas_x.size()<3){
+sum+= 0.03;
+}
+if(pelotitas_x.size()<2){
+sum+= 0.02;
+}if(pelotitas_x.size()<=1){
+sum+= 0.01;
+}
 rect_pelotita.x=sum;
+
 
 if(sum>=480)
              sum=0;
@@ -166,10 +176,6 @@ void loopMenu()
             if(Event.type == SDL_KEYDOWN)
             {
                 if(Event.key.keysym.sym == SDLK_ESCAPE)
-                    loopJuego();
-            }if(Event.type == SDL_KEYDOWN)
-            {
-                if(Event.key.keysym.sym == SDLK_SPACE)
                     loopMenu();
             }
 
@@ -240,7 +246,7 @@ int main( int argc, char* args[] )
     rect_pelotita.x=0;
     rect_pelotita.y=0;
 
-    SDL_QueryTexture(pelotita_buena, NULL, NULL, &rect_pelotita.w, &rect_pelotita.h);
+    SDL_QueryTexture(pelotita_mala, NULL, NULL, &rect_pelotita.w, &rect_pelotita.h);
 
     loopMenu();
 
